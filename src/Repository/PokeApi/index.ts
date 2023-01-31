@@ -3,7 +3,7 @@ import { Pokemon } from "../../types";
 class PokemonAPI {
   private baseUrl: string = "https://pokeapi.co/api/v2/pokemon/";
 
-  async getAllPokemons(): Promise<Array<Pokemon>> {
+  async getAllPokemons(): Promise<Pokemon[]> {
     let response = await fetch(this.baseUrl);
     let data = await response.json();
     let pokemons: Array<Pokemon> = [];
