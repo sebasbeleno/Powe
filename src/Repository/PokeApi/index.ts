@@ -40,6 +40,7 @@ class PokemonAPI {
       weight: data.weight,
       base_experience: data.base_experience,
       species: data.species.name,
+      generation: data.generation.name,
     };
     return pokemon;
   }

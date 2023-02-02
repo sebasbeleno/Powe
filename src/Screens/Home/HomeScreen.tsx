@@ -1,23 +1,65 @@
-import React, { useEffect } from "react";
+import SearchBar from "./Components/SearchBar";
+import React, { useCallback, useState, useEffect } from "react";
+import PokemonList from "./Components/PokemonList";
 import { View, Text } from "react-native";
 import { useDispatch, useStore } from "react-redux";
+import { Pokemon } from "../../types";
 import { getPokemons } from "../../Redux/Slices/Pokemons";
 import { AppDispatch, RootState } from "../../Redux";
+import CustomStatusBar from "../../Atoms/StatusBar";
+import { Colors } from "../../styles";
+
 function HomeScreen() {
+  const [pokemons, setPokemons] = useState<Pokemon[]>([]);
+  const [loading, setLoading] = useState(true);
+
   const dispatch = useDispatch<AppDispatch>();
   const store = useStore<RootState>();
 
   useEffect(() => {
-    const { pokemons } = store.getState();
+    const { pokemons: _storePokemons } = store.getState();
 
-    if (pokemons.pokemons.length === 0) {
+    store.subscribe(() => {
+      const { pokemons } = store.getState();
+      setPokemons(pokemons.pokemons);
+    });
+
+    if (_storePokemons.pokemons.length === 0) {
+
       dispatch(getPokemons());
     }
+
+    setLoading(false);
+    setPokemons(_storePokemons.pokemons);
   }, []);
 
+  const onSearch = useCallback((searchText: string) => {
+    // filter pokemons
+    if (searchText === "") {
+      setPokemons(store.getState().pokemons.pokemons);
+      return;
+    }
+
+    const filteredPokemons = pokemons.filter((pokemon) =>
+      pokemon.name.toLowerCase().includes(searchText.toLowerCase())
+    );
+    setPokemons(filteredPokemons);
+  } , []);
+
+  if (loading) {
+    return (
+      <View>
+        <Text>Loading...</Text>
+      </View>
+    );
+  }
+
+
   return (
-    <View style={{ flex: 1, alignItems: "center", justifyContent: "center" }}>
-      <Text>Home Screen</Text>
+    <View >
+      <CustomStatusBar backgroundColor={Colors.neutral.white}/>
+      <SearchBar onSearch={onSearch} />
+      <PokemonList pokemons={pokemons}/>
     </View>
   );
 }

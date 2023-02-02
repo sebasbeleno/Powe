@@ -31,7 +31,7 @@ const pokemonsSlice = createSlice({
       state.loading = "pending";
     });
     builder.addCase(getPokemons.fulfilled, (state, action) => {
-      // Add user to the state array
+      // update state
       state.pokemons = action.payload;
       state.loading = "succeeded";
     });

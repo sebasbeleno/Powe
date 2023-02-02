@@ -4,8 +4,14 @@ const HomeStack = createNativeStackNavigator();
 
 export default function HomeNavigator() {
   return (
-    <HomeStack.Navigator>
-      <HomeStack.Screen name="home" component={HomeScreen} />
+    <HomeStack.Navigator screenOptions={{
+      headerShown: false
+    }}>
+      <HomeStack.Screen
+        name="Home"
+        component={HomeScreen}
+        navigationKey="home"
+      />
     </HomeStack.Navigator>
   );
 }

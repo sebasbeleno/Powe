@@ -10,4 +10,5 @@ export interface Pokemon {
   weight: number;
   base_experience: number;
   species: string;
+  generation: string;
 }
