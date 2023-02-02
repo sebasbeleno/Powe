@@ -1,16 +1,21 @@
 import React from "react";
-import { View, StyleSheet, Text, Image } from "react-native";
+import { View, StyleSheet, Text, Image, Pressable } from "react-native";
 import { Pokemon } from "../../../types";
 import { getPokemonColorFromType } from "../../../utils";
 import { Outlines, Sizing, Typography } from "../../../styles";
 
 interface PokemonCardProps {
   pokemon: Pokemon;
+  navigateToPokemon: (pokemon: Pokemon) => void;
 }
 
-const PokemonCard: React.FC<PokemonCardProps> = ({ pokemon }) => {
+const PokemonCard: React.FC<PokemonCardProps> = ({
+  pokemon,
+  navigateToPokemon,
+}) => {
   const type = pokemon.types[0];
   const backgroundColor = getPokemonColorFromType(type);
+
   const RenderTypes = () => {
     return (
       <View style={{ flexDirection: "row" }}>
@@ -32,13 +37,19 @@ const PokemonCard: React.FC<PokemonCardProps> = ({ pokemon }) => {
   };
 
   return (
-    <View style={[styles.container, { backgroundColor }]}>
-      <View>
-        <Text style={styles.name}>{pokemon.name}</Text>
-        <RenderTypes />
+    <Pressable
+      onPress={() => {
+        navigateToPokemon(pokemon);
+      }}
+    >
+      <View style={[styles.container, { backgroundColor }]}>
+        <View>
+          <Text style={styles.name}>{pokemon.name}</Text>
+          <RenderTypes />
+        </View>
+        <Image source={{ uri: pokemon.image }} style={styles.image} />
       </View>
-      <Image source={{ uri: pokemon.image }} style={styles.image} />
-    </View>
+    </Pressable>
   );
 };
 

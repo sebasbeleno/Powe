@@ -9,7 +9,7 @@ import { AppDispatch, RootState } from "../../Redux";
 import CustomStatusBar from "../../Atoms/StatusBar";
 import { Colors } from "../../styles";
 
-function HomeScreen() {
+function HomeScreen({ navigation }) {
   const [pokemons, setPokemons] = useState<Pokemon[]>([]);
   const [loading, setLoading] = useState(true);
 
@@ -25,7 +25,6 @@ function HomeScreen() {
     });
 
     if (_storePokemons.pokemons.length === 0) {
-
       dispatch(getPokemons());
     }
 
@@ -44,7 +43,11 @@ function HomeScreen() {
       pokemon.name.toLowerCase().includes(searchText.toLowerCase())
     );
     setPokemons(filteredPokemons);
-  } , []);
+  }, []);
+
+  const navigateToPokemon = useCallback((pokemon: Pokemon) => {
+    navigation.navigate("Pokemon", { pokemon });
+  }, []);
 
   if (loading) {
     return (
@@ -54,12 +57,11 @@ function HomeScreen() {
     );
   }
 
-
   return (
-    <View >
-      <CustomStatusBar backgroundColor={Colors.neutral.white}/>
+    <View>
+      <CustomStatusBar backgroundColor={Colors.neutral.white} />
       <SearchBar onSearch={onSearch} />
-      <PokemonList pokemons={pokemons}/>
+      <PokemonList pokemons={pokemons} navigateToPokemon={navigateToPokemon}/>
     </View>
   );
 }

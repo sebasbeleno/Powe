@@ -11,4 +11,5 @@ export interface Pokemon {
   base_experience: number;
   species: string;
   generation: string;
+  gender: string;
 }
