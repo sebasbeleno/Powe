@@ -1,5 +1,5 @@
 import React from "react";
-import { View, StyleSheet, Text, Image, Pressable } from "react-native";
+import { View, StyleSheet } from "react-native";
 import { Pokemon } from "../../../types";
 import InformationListItem from "../../../Atoms/InformationListItem";
 import { Sizing, Typography, Colors } from "../../../styles";

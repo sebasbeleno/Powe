@@ -1,22 +1,36 @@
 import React from "react";
 import { View, StyleSheet, Text, Pressable } from "react-native";
-import { tabsDTO } from "../PokemonScreen";
-
 interface TabsProps {
   currentTab: string;
   setCurrentTab: (tab: string) => void;
 }
 
+export const tabsDTO = [
+  {
+    name: "About",
+    key: "about",
+  },
+  {
+    name: "Base Stats",
+    key: "baseStats",
+  },
+  {
+    name: "Abilities",
+    key: "abilities",
+  },
+];
+
 const Tabs: React.FC<TabsProps> = ({ currentTab, setCurrentTab }) => {
   return (
     <View style={styles.container}>
-      {tabsDTO.map((tab) => {
+      {tabsDTO.map((tab, index) => {
         const isActive = tab.key === currentTab;
         return (
           <Pressable
             onPress={() => {
               setCurrentTab(tab.key);
             }}
+            key={index}
           >
             <View
               style={isActive ? styles.activeTabContainer : styles.tabContainer}

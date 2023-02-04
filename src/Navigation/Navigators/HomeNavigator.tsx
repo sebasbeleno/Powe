@@ -1,27 +1,30 @@
+import React from "react";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import HomeScreen from "../../Screens/Home";
 import PokemonScreen from "../../Screens/Pokemon";
-const HomeStack = createNativeStackNavigator();
 
-export default function HomeNavigator() {
+const Stack = createNativeStackNavigator();
+
+const HomeNavigator = (): JSX.Element => {
   return (
-    <HomeStack.Navigator
-      screenOptions={{
-        headerShown: false,
-      }}
-    >
-      <HomeStack.Screen
+    <Stack.Navigator>
+      <Stack.Screen
+        options={{ headerShown: false }}
         name="Home"
         component={HomeScreen}
-        navigationKey="home"
       />
-      <HomeStack.Group screenOptions={{ presentation: "modal" }}>
-        <HomeStack.Screen
+      <Stack.Group screenOptions={{ presentation: "modal" }}>
+        <Stack.Screen
+          options={{
+            headerShown: false,
+          }}
           name="Pokemon"
           component={PokemonScreen}
           navigationKey="Pokemon"
         />
-      </HomeStack.Group>
-    </HomeStack.Navigator>
+      </Stack.Group>
+    </Stack.Navigator>
   );
-}
+};
+
+export default HomeNavigator;

@@ -19,7 +19,7 @@ const PokemonCard: React.FC<PokemonCardProps> = ({
   const RenderTypes = () => {
     return (
       <View style={{ flexDirection: "row" }}>
-        {pokemon.types.map((type) => (
+        {pokemon.types.map((type, index) => (
           <Text
             style={{
               ...Typography.regular.x20,

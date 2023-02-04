@@ -7,28 +7,19 @@ import Tabs from "./Components/Tabs";
 import About from "./Components/About";
 import BaseStats from "./Components/BaseStats";
 import Abilities from "./Components/Abilities";
+import { HeaderBar } from "./Components/HeaderBar";
+import { useDispatch } from "react-redux";
+import { addFavorite } from "../../Redux/Slices/Favorites";
+import { tabsDTO } from "./Components/Tabs";
 
 interface PokemonScreenProps {
   route: any;
   navigation: any;
 }
 
-export const tabsDTO = [
-  {
-    name: "About",
-    key: "about",
-  },
-  {
-    name: "Base Stats",
-    key: "baseStats",
-  },
-  {
-    name: "Abilities",
-    key: "abilities",
-  },
-];
-
 const PokemonScreen = ({ route, navigation }: PokemonScreenProps) => {
+  const dispatch = useDispatch();
+
   const { pokemon } = route.params as { pokemon: Pokemon };
 
   const [activeTab, setActiveTab] = useState(tabsDTO[0].key);
@@ -40,11 +31,19 @@ const PokemonScreen = ({ route, navigation }: PokemonScreenProps) => {
     setActiveTab(tab);
   };
 
+  const handleBack = () => {
+    navigation.goBack();
+  };
+
+  const handleFavorite = () => {
+    dispatch(addFavorite(pokemon));
+  };
+
   const RenderTypes = () => {
     return (
       <View style={{ flexDirection: "row" }}>
-        {pokemon.types.map((type) => (
-          <View>
+        {pokemon.types.map((type, index) => (
+          <View key={index}>
             <Text
               style={{
                 ...Typography.regular.x30,
@@ -86,6 +85,7 @@ const PokemonScreen = ({ route, navigation }: PokemonScreenProps) => {
 
   return (
     <View style={[styles.container, { backgroundColor }]}>
+      <HeaderBar favorite onFavorite={handleFavorite} onBack={handleBack} />
       {Header}
       <View style={styles.Content}>
         <Image

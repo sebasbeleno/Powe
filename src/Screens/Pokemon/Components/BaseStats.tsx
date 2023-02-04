@@ -12,9 +12,9 @@ interface BaseStatsProps {
 const BaseStats: React.FC<BaseStatsProps> = ({ pokemon }) => {
   return (
     <View>
-      {pokemon.stats.map((stat) => {
+      {pokemon.stats.map((stat, index) => {
         return (
-          <View key={stat.name} style={styles.itemContainer}>
+          <View key={index} style={styles.itemContainer}>
             <View style={{ flex: 1 }}>
               <Text style={styles.itemName}>{stat.name}</Text>
             </View>

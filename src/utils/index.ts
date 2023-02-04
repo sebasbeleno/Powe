@@ -1,3 +1,6 @@
+import TeamStats from "../Screens/Favorites/Components/TeamStats";
+import { Pokemon } from "../types";
+
 export const getPokemonColorFromType = (type: string) => {
   switch (type) {
     case "grass":
@@ -37,4 +40,24 @@ export const getPokemonColorFromType = (type: string) => {
     default:
       return "#000000";
   }
+};
+
+export const getTeamStats = (team: Pokemon[]) => {
+  const stats = {
+    hp: 0,
+    attack: 0,
+    defense: 0,
+    specialAttack: 0,
+    specialDefense: 0,
+    speed: 0,
+  };
+
+  // stats : {name: string, value: number}[]
+  team.forEach((pokemon) => {
+    pokemon.stats.forEach((stat) => {
+      stats[stat.name] += stat.value;
+    });
+  });
+
+  return stats;
 };
