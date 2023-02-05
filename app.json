@@ -1,0 +1,27 @@
+{
+    "expo": {
+        "name": "Powe",
+        "description": "Pokemon App for iOS and Android",
+        "ios": {
+            "supportsTablet": false
+        },
+        "android": {
+            "package": "com.bewe.powe",
+            "adaptiveIcon": {
+                "foregroundImage": "./assets/image/icon.png",
+                "backgroundColor": "#FFFFFF"
+            }
+        },
+        "extra": {
+            "eas": {
+                "projectId": "775aeec1-a1aa-4616-85c4-f1ef4967cc83"
+            }
+        },
+        "splash": {
+            "image": "./assets/image/splash.png",
+            "resizeMode": "contain",
+            "backgroundColor": "#ffffff"
+        },
+        "icon": "./assets/image/icon.png"
+    }
+}
