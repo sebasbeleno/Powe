@@ -22,7 +22,7 @@ const TeamStats: React.FC<TeamStatsProps> = ({ team }) => {
 
   useEffect(() => {
     get(team);
-  }, []);
+  }, [team]);
 
   const get = (team: Pokemon[]) => {
     const _stats = getTeamStats(team);

@@ -56,6 +56,7 @@ const FavoritesScreen = () => {
       </View>
     );
   };
+
   return (
     <View style={styles.container}>
       <CustomStatusBar backgroundColor="#fff" />

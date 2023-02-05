@@ -6,11 +6,14 @@ class PokemonAPI {
   async getAllPokemons(): Promise<Pokemon[]> {
     let response = await fetch(this.baseUrl);
     let data = await response.json();
-    let pokemons: Array<Pokemon> = [];
-    for (let i = 0; i < data.results.length; i++) {
-      let pokemon = await this.getPokemon(data.results[i].name);
-      pokemons.push(pokemon);
+    let pokemons: Pokemon[] = [];
+
+    for (let pokemon of data.results) {
+      let pokemonData = await this.getPokemon(pokemon.name);
+      pokemons.push(pokemonData);
     }
+
+
     return pokemons;
   }
 
@@ -24,7 +27,8 @@ class PokemonAPI {
     // Gets the image url for the pokemon
     const image = `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/home/${data.id}.png`;
 
-    const gender = await this.getPokemonGender(data.species.name);
+    const gender = '';
+
     // Creates a Pokemon object
     let pokemon: Pokemon = {
       id: data.id,
@@ -41,19 +45,17 @@ class PokemonAPI {
       weight: data.weight,
       base_experience: data.base_experience,
       species: data.species.name,
-      generation: data.generation.name,
+      generation: '', // TODO: Fix this
       gender,
     };
+
     return pokemon;
   }
 
   async getPokemonGender(name: string): Promise<string> {
-    const url = "https://pokeapi.co/api/v2/gender/";
+    // TODO: Fix this
 
-    let response = await fetch(url + name);
-    let data = await response.json();
-
-    return data.name;
+    return "";
   }
 }
 

@@ -25,6 +25,7 @@ function HomeScreen({ navigation }) {
     });
 
     if (_storePokemons.pokemons.length === 0) {
+      console.log("fetching pokemons");
       dispatch(getPokemons());
     }
 

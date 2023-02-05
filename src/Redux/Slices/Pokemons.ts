@@ -12,8 +12,9 @@ const initialState: {
 
 export const getPokemons = createAsyncThunk(
   "@Pokemons/getPokemons",
-  async (thunkAPI) => {
+  async () => {
     const response = await PokeApi.getAllPokemons();
+    console.log(response);
     return response;
   }
 );
