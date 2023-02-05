@@ -25,7 +25,6 @@ function HomeScreen({ navigation }) {
     });
 
     if (_storePokemons.pokemons.length === 0) {
-      console.log("fetching pokemons");
       dispatch(getPokemons());
     }
 
@@ -43,6 +42,7 @@ function HomeScreen({ navigation }) {
     const filteredPokemons = pokemons.filter((pokemon) =>
       pokemon.name.toLowerCase().includes(searchText.toLowerCase())
     );
+
     setPokemons(filteredPokemons);
   }, []);
 
@@ -62,7 +62,7 @@ function HomeScreen({ navigation }) {
     <View>
       <CustomStatusBar backgroundColor={Colors.neutral.white} />
       <SearchBar onSearch={onSearch} />
-      <PokemonList pokemons={pokemons} navigateToPokemon={navigateToPokemon}/>
+      <PokemonList pokemons={pokemons} navigateToPokemon={navigateToPokemon} />
     </View>
   );
 }
